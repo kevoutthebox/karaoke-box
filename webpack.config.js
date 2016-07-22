@@ -1,19 +1,14 @@
 module.exports = {
-  entry: __dirname + '/src',
-  output: {
-    path: '/'
-  },
-  devtool: 'source-maps',
-  module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        loader: 'babel',
-        query: {
-          presets: ['es2015', 'react'],
-          plugins: ['transform-class-properties']
-        }
-      }
-    ]
-  }
-}
+	entry: "./app-client.js",
+	output: {
+		filename: "public/bundle.js"
+	},
+	module: {
+		loaders: [
+			{
+				exclude: /(node_modules|app-server.js)/,
+				loader: 'babel'
+			}
+		]
+	}
+};

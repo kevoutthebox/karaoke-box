@@ -1,0 +1,68 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+}
+
+#connection-status {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    padding: 0;
+    margin: 20px;
+    display: block;
+}
+
+#connection-status.connected {
+    background-color: green;
+}
+
+#connection-status.disconnected {
+    background-color: red;
+}
+
+form button {
+    margin: 1em 0;
+}
+
+form label {
+    font-size: 1.5em;
+    margin: 1em 0 0;
+}
+
+div#not-found a {
+    display: block;
+    clear: both;
+}
+
+div#not-found a,
+form a {
+    position: relative;
+    left: 15px;
+    top: 10px;
+    padding-left: 20px;
+}
+
+
+#questions>div>span {
+    padding: .5em;
+    margin: .5em;
+    display: block;
+    cursor: pointer;
+    border: 2px solid green;
+}
+
+#questions>div>span:hover {
+    background-color: yellow;
+}
+
+#currentQuestion button {
+    margin: 2px 0;
+    cursor: pointer;
+}
+
+#currentQuestion button:hover {
+    opacity: 0.9;
+}
+
