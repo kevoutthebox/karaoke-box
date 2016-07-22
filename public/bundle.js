@@ -20438,10 +20438,20 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _users = __webpack_require__(210);
+
+	var _users2 = _interopRequireDefault(_users);
+
 	var io = __webpack_require__(158);
 
 	var APP = _react2['default'].createClass({
 	    displayName: 'APP',
+
+	    getInitialState: function getInitialState() {
+	        return {
+	            users: [{ name: 'binh' }, { name: 'blake' }, { name: 'kevin' }, { name: 'zhiwen' }]
+	        };
+	    },
 
 	    componentWillMount: function componentWillMount() {
 	        this.socket = io('http://localhost:3000');
@@ -20449,14 +20459,15 @@
 	    },
 
 	    connect: function connect() {
-	        alert("Connected: " + this.socket.id);
+	        console.log("Connected: " + this.socket.id);
 	    },
 
 	    render: function render() {
 	        return _react2['default'].createElement(
 	            'div',
 	            { className: 'MainComponent' },
-	            'hellodoes this work'
+	            'hello',
+	            _react2['default'].createElement(_users2['default'], { singers: this.state.users })
 	        );
 	    }
 
@@ -27675,6 +27686,41 @@
 	};
 
 
+
+/***/ },
+/* 210 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var Users = _react2['default'].createClass({
+	  displayName: 'Users',
+
+	  render: function render() {
+	    var allUsers = this.props.singers.map(function (singer) {
+	      return _react2['default'].createElement(
+	        'li',
+	        null,
+	        singer.name
+	      );
+	    });
+
+	    return _react2['default'].createElement(
+	      'ul',
+	      null,
+	      allUsers,
+	      ' hello'
+	    );
+	  }
+	});
+
+	module.exports = Users;
 
 /***/ }
 /******/ ]);
