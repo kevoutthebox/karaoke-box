@@ -1,7 +1,8 @@
-var React = require('react');
+import React, { Component } from 'react'
 var io = require('socket.io-client');
 
 var APP = React.createClass({
+
 
     componentWillMount() {
         this.socket = io('http://localhost:3000');
@@ -13,7 +14,12 @@ var APP = React.createClass({
     },
 
     render() {
-        return (<h1>KARAOKE STREAM! GET HYPE!</h1>);
+        return (<div className = 'MainComponent'>
+hellodoes this work
+                </div>
+
+
+      );
     }
 
 });
