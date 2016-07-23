@@ -4,13 +4,14 @@ html, body, h1, h2, h3, h4, ul, li, p, {
 }
 
 body {
+  padding-bottom: 30px;
   position: relative;
 }
 
 body > svg {
-  position: absolute;
   left: 25px;
-  top: 250px;
+  position: absolute;
+  top: 288px;
   width: 1050px;
 }
 
@@ -24,6 +25,11 @@ header {
   position: absolute;
   width: 60px;
   transition: 0.3s all ease-in-out;
+}
+
+.logo {
+  width: 350px;
+  margin-bottom: 50px;
 }
 
 .logo-mini.active {
@@ -41,14 +47,19 @@ header {
   z-index: 4;
 }
 
+.score {
+  color: #802392;
+  font-size: 40px;
+  font-weight: bold;
+  position: absolute;
+  right: -300px;
+  top: -115px;
+}
+
 .login-container {
   position: relative;
   z-index: 3;
-}
-
-.logo {
-  width: 350px;
-  margin-bottom: 50px;
+  animation: groove 5s infinite;
 }
 
 .toggle-view {
@@ -65,6 +76,17 @@ header {
   margin: 0 auto;
   width: 300px;
   position: relative;
+}
+
+.enter-form .form-control {
+  display: inline-block;
+  margin-right: 5%;
+  width: 75%;
+}
+
+.enter-form .btn {
+  vertical-align: top;
+  width: 20%;
 }
 
 .toggle-container {
@@ -155,47 +177,53 @@ header {
 
 .form-control {
   margin-bottom: 10px;
+  display: inline-block;
 }
 
+@-webkit-keyframes groove {
+  0% {
+    background-color: #EFFFFA;
+  }
+  15% {
+    background-color: #83C9F4;
+  }
+  30% {
+    background-color: #C4B7CB;
+  }
+  45% {
+    background-color: #F56476;
+  }
+  60% {
+    background-color: #F3EEC3;
+  }
+  80% {
+    background-color: #A997DF;
+  }
+  10% {
+    background-color: #EFFFFA;
+  }
+}
 
-// .singers-container .singers {
-//   list-style-type: none;
-// }
-
-// .singer{
-//   background: #ccc;
-//   border: 1px solid #eee;
-//   height: 150px;
-
-//   opacity:0;
-//   opacity: 1 \9; /*just in case ie*/
-//   -webkit-animation:fadeIn ease-in 1;
-//   -moz-animation:fadeIn ease-in 1;
-//   animation:fadeIn ease-in 1;
-
-//   -webkit-animation-fill-mode:forwards;
-//   -moz-animation-fill-mode:forwards;
-//   animation-fill-mode:forwards;
-
-//   -webkit-animation-duration:0.5s;
-//   -moz-animation-duration:0.5s;
-//   animation-duration:0.5s;
-
-//   -webkit-animation-delay: 0.1s;
-//   -moz-animation-delay: 0.1s;
-//   animation-delay: 0.1s;
-// }
-
-// /* Keyframes for the fade-in */
-// @-webkit-keyframes fadeIn {
-//   from { opacity:0; }
-//   to { opacity:1; }
-// }
-// @-moz-keyframes fadeIn {
-//   from { opacity:0; }
-//   to { opacity:1; }
-// }
-// @keyframes fadeIn {
-//   from { opacity:0; }
-//   to { opacity:1; }
-// }
+@keyframes groove {
+  0% {
+    background-color: #EFFFFA;
+  }
+  15% {
+    background-color: #83C9F4;
+  }
+  30% {
+    background-color: #C4B7CB;
+  }
+  45% {
+    background-color: #F56476;
+  }
+  60% {
+    background-color: #F3EEC3;
+  }
+  80% {
+    background-color: #A997DF;
+  }
+  10% {
+    background-color: #EFFFFA;
+  }
+}
