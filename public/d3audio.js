@@ -1,11 +1,13 @@
 // imports D3MusicFrequency object
-function D3MusicFrequency(color) {
+function D3MusicFrequency() {
   this.mainSvg = null;
   this.mainSvgHeight = 300;
   this.mainSvgWidth = 1200;
   this.barPadding = '1';
   this.analyser = null; // analyser node that writes frequencyData
   this.frequencyData = null; // sync frequencyData 8bit or 32bit array to D3Music
+  this.opacity = 1;
+  this.color = null;
 
   this.createMainSvg = function(parent) {
     this.mainSvg = d3.select(parent).append('svg').attr('height', this.mainSvgHeight).attr('width', this.mainSvgWidth);
@@ -31,7 +33,6 @@ function D3MusicFrequency(color) {
   this.renderFrequencies = function() {
     // requestAnimationFrame(this.renderFrequencies);
     this.analyser.getByteFrequencyData(this.frequencyData); // now frequencyData array has data
-
     this.mainSvg.selectAll('rect')
       .data(this.frequencyData)
       .attr('y', (d) => {
@@ -40,27 +41,50 @@ function D3MusicFrequency(color) {
       .attr('height', (d) => {
         return d;
       })
+      .attr('opacity', (d) => {
+        return this.opacity;
+      })
+      .attr('transition', (d) => {
+        return 0.3;
+      })
       .attr('fill', (d) => {
-        if (color === 'purple') {
+        if (this.color === 'purple') {
           return 'rgb(' + d +  ',' + 30 + ',' + 200 + ')';
-        } else if (color === 'lightPurple') {
-          return 'rgb(' + d +  ',' + 45 + ',' + 170 + ')';
-        } else if (color === 'green') {
+        } else if (this.color === 'lightPurple') {
+          return 'rgb(' + d +  ',' + 40 + ',' + 150 + ')';
+        } else if (this.color === 'green') {
           return 'rgb(' + 100 +  ',' + 200 + ',' + d + ')';
-        } else if (color === 'greenPink') {
+        } else if (this.color === 'greenPink') {
           return 'rgb(' + 255 - d +  ',' + 0 + ',' + 0 + ')';
-        } else if (color === 'neonYellow') {
+        } else if (this.color === 'neonYellow') {
           return 'rgb(' + (d + 50) +  ',' + 255 + ',' + 0 + ')';
-        } else if (color === 'blackRed') {
+        } else if (this.color === 'blackRed') {
           return 'rgb(' + (d + 50) +  ',' + 0 + ',' + 0 + ')';
-        } else if (color === 'redBlack') {
+        } else if (this.color === 'redBlack') {
           return 'rgb(' + (255 - d) +  ',' + 0 + ',' + 0 + ')';
-        } else if (color === 'orange') {
+        } else if (this.color === 'orange') {
           return 'rgb(' + Math.floor( d * 0.6 + 70) +  ',' + 120 + ',' + Math.floor(0) + ')';
-        } else if (color === 'darkPurple') {
-          return 'rgb(' + Math.floor( d * 0.90 + 70)  +  ',' + 40 + ',' + 230 + ')';
+        } else if (this.color === 'darkPurple') {
+          return 'rgb(' + Math.floor( d * 0.90 + 70)  +  ',' + 40 + ',' + 255 + ')';
         }
-      });
+      })
+      // .on('mouseover', (d) => {
+      //   this.mouseoverColor = 'black';
+      //   console.log(this.mouseoverColor);
+      //   d3.select(this).style({color: this.mouseoverColor});
+      // })
+      // .on('mouseout', (d) => {
+      //   this.mouseoverColor = this.color;
+      //   d3.select(this).style({color: this.mouseoverColor});
+      // })
+  };
+
+  this.setOpacity = function(opacity) {
+    this.opacity = opacity;
+  };
+
+  this.setColor = function(color) {
+    this.color = color;
   };
 
   this.remove = function() {
@@ -143,8 +167,10 @@ window.onload = function() {
 
   var audioFrequencyData = new Uint8Array(audioAnalyser.frequencyBinCount/15);
 
-  var d3MusicFrequencyAudio = new D3MusicFrequency('lightPurple');
+  var d3MusicFrequencyAudio = new D3MusicFrequency();
   d3MusicFrequencyAudio.bind(audioAnalyser, audioFrequencyData);
+  d3MusicFrequencyAudio.setColor('lightPurple');
+  d3MusicFrequencyAudio.setOpacity(0.4);
   d3MusicFrequencyAudio.createMainSvg('body');
   d3MusicFrequencyAudio.createFrequencies();
 
@@ -194,6 +220,9 @@ window.onload = function() {
 
     var d3MusicFrequencyStream = new D3MusicFrequency('purple');
     d3MusicFrequencyStream.bind(streamAnalyser, streamFrequencyData);
+    d3MusicFrequencyStream.setColor('purple');
+    d3MusicFrequencyStream.setOpacity(0.75);
+
     d3MusicFrequencyStream.createMainSvg('body');
     d3MusicFrequencyStream.createFrequencies();
 
@@ -221,7 +250,6 @@ window.onload = function() {
       // console.log('max index ' + maxIndex);
       d3MusicFrequencyStream.renderFrequencies();
     }, 5);
-
   }
 
   function error(error) {
