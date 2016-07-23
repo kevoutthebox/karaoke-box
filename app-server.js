@@ -47,11 +47,11 @@ io.sockets.on('connection', function (socket) {
 	socket.on('sendMessage', function(payload){
 		var newMessageEntry = {
 			name: payload.name,
-			message: payload.message
+			message: payload.message,
+			createdAt: new Date()
 		}
 
 		messageList.push(newMessageEntry);
-
 		io.sockets.emit('updateMessages', messageList);
 	});
 

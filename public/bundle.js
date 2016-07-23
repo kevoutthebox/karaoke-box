@@ -23743,7 +23743,8 @@
 	      status: 'Disconnected',
 	      singer: {},
 	      singersInRoom: [],
-	      messageList: []
+	      messageList: [],
+	      startConnection: ''
 	    };
 	  },
 
@@ -23767,7 +23768,8 @@
 	      this.emit('enter', member);
 	    }
 
-	    this.setState({ status: "Connected" });
+	    this.setState({ status: "Connected",
+	      startConnection: new Date() });
 	  },
 
 	  //all outgoing data to server will flow through this emit function
@@ -23806,7 +23808,12 @@
 	  },
 
 	  updateMessages: function updateMessages(newMessages) {
-	    this.setState({ messageList: newMessages });
+	    var that = this;
+	    var messageListDisplay = newMessages.filter(function (msg) {
+	      return new Date(msg.createdAt) >= that.state.startConnection;
+	    });
+
+	    this.setState({ messageList: messageListDisplay });
 	  },
 
 	  render: function render() {
