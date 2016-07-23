@@ -23750,7 +23750,8 @@
 
 	  //all incoming data from server will flow through these functions
 	  componentWillMount: function componentWillMount() {
-	    this.socket = io('http://localhost:3000');
+
+	    this.socket = io();
 	    this.socket.on('connect', this.connect);
 	    this.socket.on('disconnect', this.disconnect);
 	    this.socket.on('welcome', this.welcome);
