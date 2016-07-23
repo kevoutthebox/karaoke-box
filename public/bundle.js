@@ -60,8 +60,8 @@
 	var routes = React.createElement(
 		Route,
 		{ handler: APP },
-		React.createElement(DefaultRoute, { handler: login }),
-		React.createElement(Route, { name: 'karaokeRoom', path: 'karaokeRoom', handler: karaokeRoom }),
+		React.createElement(DefaultRoute, { handler: karaokeRoom }),
+		React.createElement(Route, { name: 'login', path: 'login', handler: login }),
 		React.createElement(NotFoundRoute, { handler: terriblesinger404 })
 	);
 
