@@ -9,7 +9,6 @@ __karaoke-box__ is an experimental, online-streaming karaoke application. Techno
   - Node / Express
   - Underscore
   - Webpack
-  - 
   
 ## Installation
 
