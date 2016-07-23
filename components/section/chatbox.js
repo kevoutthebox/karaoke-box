@@ -3,7 +3,7 @@ var React = require('react');
 var Chatbox = React.createClass({
 	sendMessage() {
 		var message = React.findDOMNode(this.refs.inputMessage).value;
-		this.props.emitMessage('sendMessage', {name: this.props.singer.name, message : message, startConnection: this.props.startConnection});
+		this.props.emitMessage('sendMessage', {name: this.props.singer.name, message : message});
 
 		// Clears input field on submit
 		React.findDOMNode(this.refs.inputMessage).value = '';
