@@ -19,7 +19,7 @@ var karaokeRoom = React.createClass({
 				</Toggle>
 
 				<Toggle if={!this.props.singer.name}>
-					<img className="logo" src="./images/KBLogo.png" />
+					<img className="logo" src="./images/KBLogoNoWord.png" />
 					<Enter emit={this.props.emit}/>
 				</Toggle>
 			</div>

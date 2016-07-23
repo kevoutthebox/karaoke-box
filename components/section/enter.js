@@ -7,7 +7,7 @@ var Enter = React.createClass({
 		var singerName = React.findDOMNode(this.refs.name).value;
 		this.props.emit('enter', {name : singerName});
 
-		document.querySelector('.no-show').style.display = 'block';
+		// document.querySelector('.toggle-view').style.display = 'block';
 	},
 
 	render() {
@@ -18,7 +18,7 @@ var Enter = React.createClass({
 				<input ref="name" className="form-control"
 							placeholder="Please enter name"
 							required />
-				<button className="btn btn-primary">Enter</button>
+				<button type="submit" className="btn btn-primary">Enter</button>
 			</form>
 		)
 	}
