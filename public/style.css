@@ -1,68 +1,47 @@
 html,
 body {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
-#connection-status {
-    height: 35px;
-    width: 35px;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    padding: 0;
-    margin: 20px;
-    display: block;
+.singers-container .singers {
+  list-style-type: none;
 }
 
-#connection-status.connected {
-    background-color: green;
+.singer{
+  background: #ccc;
+  border: 1px solid #eee;
+  height: 150px;
+
+  opacity:0;
+  opacity: 1 \9; /*just in case ie*/
+  -webkit-animation:fadeIn ease-in 1;
+  -moz-animation:fadeIn ease-in 1;
+  animation:fadeIn ease-in 1;
+
+  -webkit-animation-fill-mode:forwards;
+  -moz-animation-fill-mode:forwards;
+  animation-fill-mode:forwards;
+
+  -webkit-animation-duration:0.5s;
+  -moz-animation-duration:0.5s;
+  animation-duration:0.5s;
+
+  -webkit-animation-delay: 0.1s;
+  -moz-animation-delay: 0.1s;
+  animation-delay: 0.1s;
 }
 
-#connection-status.disconnected {
-    background-color: red;
+/* Keyframes for the fade-in */
+@-webkit-keyframes fadeIn {
+  from { opacity:0; }
+  to { opacity:1; }
 }
-
-form button {
-    margin: 1em 0;
+@-moz-keyframes fadeIn {
+  from { opacity:0; }
+  to { opacity:1; }
 }
-
-form label {
-    font-size: 1.5em;
-    margin: 1em 0 0;
+@keyframes fadeIn {
+  from { opacity:0; }
+  to { opacity:1; }
 }
-
-div#not-found a {
-    display: block;
-    clear: both;
-}
-
-div#not-found a,
-form a {
-    position: relative;
-    left: 15px;
-    top: 10px;
-    padding-left: 20px;
-}
-
-
-#questions>div>span {
-    padding: .5em;
-    margin: .5em;
-    display: block;
-    cursor: pointer;
-    border: 2px solid green;
-}
-
-#questions>div>span:hover {
-    background-color: yellow;
-}
-
-#currentQuestion button {
-    margin: 2px 0;
-    cursor: pointer;
-}
-
-#currentQuestion button:hover {
-    opacity: 0.9;
-}
-
