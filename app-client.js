@@ -9,17 +9,18 @@ var login = require('./components/login');
 var karaokeRoom = require('./components/karaokeRoom');
 var terriblesinger404 = require('./components/terriblesinger404');
 
+
+
 var routes = (
 	<Route handler={APP}>
-		<DefaultRoute handler={login} />
-		<Route name="karaokeRoom" path="karaokeRoom" handler={karaokeRoom}></Route>
+		<DefaultRoute handler={karaokeRoom} />
+		<Route name="login" path="login" handler={login}></Route>
 		<NotFoundRoute handler = {terriblesinger404} />
 	</Route>
-); 
+);
 
 // When run routes, callback gets appropriate routes, which represents
 // DOM at top level
 Router.run(routes, function(Handler) {
 	React.render(<Handler />, document.getElementById('react-container'));
 });
-
