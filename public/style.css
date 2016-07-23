@@ -67,6 +67,17 @@ header {
   position: relative;
 }
 
+.enter-form .form-control {
+  display: inline-block;
+  margin-right: 5%;
+  width: 75%;
+}
+
+.enter-form .btn {
+  vertical-align: top;
+  width: 20%;
+}
+
 .toggle-container {
   position: relative;
   overflow: auto;
@@ -115,6 +126,8 @@ header {
 
 .form-control {
   margin-bottom: 10px;
+  display: inline-block;
+
 }
 
 
