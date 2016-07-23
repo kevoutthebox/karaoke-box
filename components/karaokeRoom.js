@@ -10,7 +10,7 @@ var karaokeRoom = React.createClass({
 		return (
 			<div>
 				<Toggle if={this.props.singer.name}>
-					<h1>Hello {this.props.singer.name}</h1>
+					<h1>Hello! {this.props.singer.name}</h1>
 					<p>You are singer number {this.props.singersInRoom.length}</p>
 					<p>Get your mic ready!</p>
 					<Chatbox {...this.props}></Chatbox>
