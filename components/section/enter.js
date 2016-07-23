@@ -6,8 +6,6 @@ var Enter = React.createClass({
 		// fell back to findDOMNode method
 		var singerName = React.findDOMNode(this.refs.name).value;
 		this.props.emit('enter', {name : singerName});
-
-		// document.querySelector('.toggle-view').style.display = 'block';
 	},
 
 	render() {

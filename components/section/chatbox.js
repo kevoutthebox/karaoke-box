@@ -15,11 +15,20 @@ var Chatbox = React.createClass({
 		)
 	},
 
+	activeUser(user, i) {
+		return (
+			<li className="activeUser" key={i}>{user.name}</li>
+		)
+	},
+
 	render() {
 		return(
 			<div className="chatbox">
 				<ul className="message-list" id="test">
 					{this.props.messageList.map(this.repeatMessage)}
+				</ul>
+				<ul className='users-avatar'>
+					{this.props.singersInRoom.map(this.activeUser)}
 				</ul>
 				<form action="javascript:void(0)" onSubmit={this.sendMessage}>
 					<input ref="inputMessage" className="form-control"

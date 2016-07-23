@@ -113,6 +113,46 @@ header {
   background: #eee;
 }
 
+.users-avatar {
+  list-style-type: none;
+  margin-bottom: 10px;
+  overflow: auto;
+  padding-left: 0;
+}
+
+.users-avatar li {
+  background-color: #ccc;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  color: #fff;
+  float: left;
+  height: 50px;
+  line-height: 50px;
+  transition: 0.3s all ease-in-out;
+  width: 25%;
+}
+
+.users-avatar li:nth-child(n) {
+  background-color: #183A37;
+}
+
+.users-avatar li:nth-child(n+1) {
+  background-color: #499F68;  
+}
+
+.users-avatar li:nth-child(n+2) {
+  background-color: #087CA7;  
+}
+
+.users-avatar li:nth-child(n+3) {
+  background-color: #8C271E;  
+}
+
+.users-avatar li:hover {
+  cursor: pointer;
+  opacity: .8;
+}
+
 .form-control {
   margin-bottom: 10px;
 }
