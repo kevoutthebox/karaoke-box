@@ -9,7 +9,6 @@ var APP = React.createClass({
 
   getInitialState() {
     return {
-      title: 'Karaoke Box',
       roomTitle: '',
       status: 'Disconnected',
       singer: {},
@@ -66,7 +65,8 @@ var APP = React.createClass({
 
     // if user session is still available, display play button
     if (sessionStorage.singer) {
-      document.querySelector('.no-show').style.display = 'block';
+      document.querySelector('.toggle-view').style.display = 'block';
+      document.querySelector('.logo-mini').style.display = 'block';
     }
   },
 

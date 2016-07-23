@@ -23739,7 +23739,6 @@
 
 	  getInitialState: function getInitialState() {
 	    return {
-	      title: 'Karaoke Box',
 	      roomTitle: '',
 	      status: 'Disconnected',
 	      singer: {},
@@ -23796,7 +23795,8 @@
 
 	    // if user session is still available, display play button
 	    if (sessionStorage.singer) {
-	      document.querySelector('.no-show').style.display = 'block';
+	      document.querySelector('.toggle-view').style.display = 'block';
+	      document.querySelector('.logo-mini').style.display = 'block';
 	    }
 	  },
 
@@ -31273,11 +31273,8 @@
 			return React.createElement(
 				'header',
 				null,
-				React.createElement(
-					'h1',
-					null,
-					this.props.title
-				)
+				React.createElement('img', { className: 'logo-mini', src: './images/KBLogoNoWord.png' }),
+				React.createElement('img', { className: 'logo-text', src: './images/KBLogoType.png' })
 			);
 		}
 	});
@@ -31355,7 +31352,7 @@
 				React.createElement(
 					Toggle,
 					{ 'if': !this.props.singer.name },
-					React.createElement('img', { className: 'logo', src: './images/KBLogo.png' }),
+					React.createElement('img', { className: 'logo', src: './images/KBLogoNoWord.png' }),
 					React.createElement(Enter, { emit: this.props.emit })
 				)
 			);
@@ -31381,7 +31378,7 @@
 			var singerName = React.findDOMNode(this.refs.name).value;
 			this.props.emit('enter', { name: singerName });
 
-			document.querySelector('.no-show').style.display = 'block';
+			// document.querySelector('.toggle-view').style.display = 'block';
 		},
 
 		render: function render() {
@@ -31395,7 +31392,7 @@
 					required: true }),
 				React.createElement(
 					'button',
-					{ className: 'btn btn-primary' },
+					{ type: 'submit', className: 'btn btn-primary' },
 					'Enter'
 				)
 			);
@@ -31420,7 +31417,7 @@
 			// if the 'if' is true, then display all children nodes
 			return this.props['if'] ? React.createElement(
 				'div',
-				null,
+				{ className: 'login-container' },
 				this.props.children
 			) : null;
 		}

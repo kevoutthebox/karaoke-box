@@ -15,7 +15,8 @@ var Header = React.createClass({
 	render() {
 		return (
 			<header>
-				<h1>{this.props.title}</h1>
+				<img className="logo-mini" src="./images/KBLogoNoWord.png" />
+				<img className="logo-text" src="./images/KBLogoType.png" />
 			</header>
 		);
 	}
