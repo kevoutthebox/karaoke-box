@@ -6,13 +6,13 @@ var Chatbox = require('./section/chatbox');
 var karaokeRoom = React.createClass({
 	render() {
 		// if provide singer name, navigate to karaoke room
-		// else sign in
+		// else continue sign in
 		return (
 			<div className="toggle-container">
 				<Toggle if={this.props.singer.name}>
 					<div className="welcome-message">
 						<h1>Hello! {this.props.singer.name}</h1>
-						<p>You are singer number {this.props.singersInRoom.length}</p>
+						<p>Singer(s) in room: {this.props.singersInRoom.length}</p>
 						<p>Get your mic ready!</p>
 					</div>
 					<Chatbox {...this.props}></Chatbox>
