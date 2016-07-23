@@ -23791,7 +23791,13 @@
 	    // add member node to session storage to save current state
 	    // until browser closes
 	    sessionStorage.singer = JSON.stringify(singer);
+
 	    this.setState({ singer: singer });
+
+	    // if user session is still available, display play button
+	    if (sessionStorage.singer) {
+	      document.querySelector('.no-show').style.display = 'block';
+	    }
 	  },
 
 	  updateSingers: function updateSingers(newSingers) {
@@ -31319,37 +31325,37 @@
 			// else sign in
 			return React.createElement(
 				'div',
-				null,
+				{ className: 'toggle-container' },
 				React.createElement(
 					Toggle,
 					{ 'if': this.props.singer.name },
 					React.createElement(
-						'h1',
-						null,
-						'Hello ',
-						this.props.singer.name
-					),
-					React.createElement(
-						'p',
-						null,
-						'You are singer number ',
-						this.props.singersInRoom.length
-					),
-					React.createElement(
-						'p',
-						null,
-						'Get your mic ready!'
+						'div',
+						{ className: 'welcome-message' },
+						React.createElement(
+							'h1',
+							null,
+							'Hello! ',
+							this.props.singer.name
+						),
+						React.createElement(
+							'p',
+							null,
+							'You are singer number ',
+							this.props.singersInRoom.length
+						),
+						React.createElement(
+							'p',
+							null,
+							'Get your mic ready!'
+						)
 					),
 					React.createElement(Chatbox, this.props)
 				),
 				React.createElement(
 					Toggle,
 					{ 'if': !this.props.singer.name },
-					React.createElement(
-						'h1',
-						null,
-						'Join the room'
-					),
+					React.createElement('img', { className: 'logo', src: './images/KBLogo.png' }),
 					React.createElement(Enter, { emit: this.props.emit })
 				)
 			);
@@ -31374,6 +31380,8 @@
 			// fell back to findDOMNode method
 			var singerName = React.findDOMNode(this.refs.name).value;
 			this.props.emit('enter', { name: singerName });
+
+			document.querySelector('.no-show').style.display = 'block';
 		},
 
 		render: function render() {
@@ -31381,14 +31389,9 @@
 			// server because we want to communicate via sockets
 			return React.createElement(
 				'form',
-				{ action: 'javascript:void(0)', onSubmit: this.enter },
-				React.createElement(
-					'label',
-					null,
-					' Full Name '
-				),
+				{ className: 'enter-form', action: 'javascript:void(0)', onSubmit: this.enter },
 				React.createElement('input', { ref: 'name', className: 'form-control',
-					placeholder: 'enter your name',
+					placeholder: 'Please enter name',
 					required: true }),
 				React.createElement(
 					'button',
@@ -31447,7 +31450,7 @@
 		repeatMessage: function repeatMessage(message, i) {
 			return React.createElement(
 				'li',
-				{ key: i },
+				{ className: 'message', key: i },
 				message.name,
 				': ',
 				message.message
@@ -31457,26 +31460,22 @@
 		render: function render() {
 			return React.createElement(
 				'div',
-				null,
+				{ className: 'chatbox' },
 				React.createElement(
-					'div',
-					null,
+					'ul',
+					{ className: 'message-list', id: 'test' },
+					this.props.messageList.map(this.repeatMessage)
+				),
+				React.createElement(
+					'form',
+					{ action: 'javascript:void(0)', onSubmit: this.sendMessage },
+					React.createElement('input', { ref: 'inputMessage', className: 'form-control',
+						placeholder: 'Enter message',
+						required: true }),
 					React.createElement(
-						'ul',
-						null,
-						this.props.messageList.map(this.repeatMessage)
-					),
-					React.createElement(
-						'form',
-						{ action: 'javascript:void(0)', onSubmit: this.sendMessage },
-						React.createElement('input', { ref: 'inputMessage', className: 'form-control',
-							placeholder: 'Enter message',
-							required: true }),
-						React.createElement(
-							'button',
-							{ className: 'btn btn-primary' },
-							'Send'
-						)
+						'button',
+						{ className: 'btn btn-primary' },
+						'Send'
 					)
 				)
 			);
@@ -31516,7 +31515,7 @@
 				),
 				React.createElement(
 					Link,
-					{ to: '/karaokeRoom' },
+					{ to: '/' },
 					' Karaoke Room '
 				)
 			);

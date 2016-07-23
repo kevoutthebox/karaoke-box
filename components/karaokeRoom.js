@@ -8,23 +8,23 @@ var karaokeRoom = React.createClass({
 		// if provide singer name, navigate to karaoke room
 		// else sign in
 		return (
-			<div>
+			<div className="toggle-container">
 				<Toggle if={this.props.singer.name}>
-					<h1>Hello! {this.props.singer.name}</h1>
-					<p>You are singer number {this.props.singersInRoom.length}</p>
-					<p>Get your mic ready!</p>
+					<div className="welcome-message">
+						<h1>Hello! {this.props.singer.name}</h1>
+						<p>You are singer number {this.props.singersInRoom.length}</p>
+						<p>Get your mic ready!</p>
+					</div>
 					<Chatbox {...this.props}></Chatbox>
 				</Toggle>
 
 				<Toggle if={!this.props.singer.name}>
-					<h1>Join the room</h1>
+					<img className="logo" src="./images/KBLogo.png" />
 					<Enter emit={this.props.emit}/>
 				</Toggle>
-
-
 			</div>
 		)
 	}
 })
 
-module.exports = karaokeRoom
+module.exports = karaokeRoom;
