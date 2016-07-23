@@ -37,9 +37,11 @@ io.sockets.on('connection', function (socket) {
 			name: payload.name
 		}
 
-		this.emit('entered', newSinger);
+		if (singersInRoom.length < 4) {
+			this.emit('entered', newSinger);
+			singersInRoom.push(newSinger);
+		}
 
-		singersInRoom.push(newSinger);
 		// refers to every socket that we want to emit broadcast
 		io.sockets.emit('updateSingers', singersInRoom);
 	});

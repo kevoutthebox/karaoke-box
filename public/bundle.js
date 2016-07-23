@@ -23750,7 +23750,6 @@
 
 	  //all incoming data from server will flow through these functions
 	  componentWillMount: function componentWillMount() {
-
 	    this.socket = io();
 	    this.socket.on('connect', this.connect);
 	    this.socket.on('disconnect', this.disconnect);
@@ -23763,6 +23762,7 @@
 	  connect: function connect() {
 	    var member = sessionStorage.singer ? JSON.parse(sessionStorage.singer) : null;
 
+	    console.log(sessionStorage);
 	    console.log(member);
 	    if (member) {
 	      this.emit('enter', member);
@@ -23795,7 +23795,7 @@
 	    sessionStorage.singer = JSON.stringify(singer);
 
 	    this.setState({ singer: singer });
-
+	    console.log(sessionStorage.singer);
 	    // if user session is still available, display play button
 	    if (sessionStorage.singer) {
 	      document.querySelector('.toggle-view').style.display = 'block';
@@ -31263,6 +31263,7 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
+
 	var Header = React.createClass({
 		displayName: 'Header',
 
@@ -31327,7 +31328,7 @@
 
 		render: function render() {
 			// if provide singer name, navigate to karaoke room
-			// else sign in
+			// else continue sign in
 			return React.createElement(
 				'div',
 				{ className: 'toggle-container' },
@@ -31346,7 +31347,7 @@
 						React.createElement(
 							'p',
 							null,
-							'You are singer number ',
+							'Singer(s) in room: ',
 							this.props.singersInRoom.length
 						),
 						React.createElement(
@@ -31385,8 +31386,6 @@
 			// fell back to findDOMNode method
 			var singerName = React.findDOMNode(this.refs.name).value;
 			this.props.emit('enter', { name: singerName });
-
-			// document.querySelector('.toggle-view').style.display = 'block';
 		},
 
 		render: function render() {
@@ -31462,6 +31461,14 @@
 			);
 		},
 
+		activeUser: function activeUser(user, i) {
+			return React.createElement(
+				'li',
+				{ className: 'activeUser', key: i },
+				user.name
+			);
+		},
+
 		render: function render() {
 			return React.createElement(
 				'div',
@@ -31470,6 +31477,11 @@
 					'ul',
 					{ className: 'message-list', id: 'test' },
 					this.props.messageList.map(this.repeatMessage)
+				),
+				React.createElement(
+					'ul',
+					{ className: 'users-avatar' },
+					this.props.singersInRoom.map(this.activeUser)
 				),
 				React.createElement(
 					'form',
