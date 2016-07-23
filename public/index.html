@@ -4,9 +4,11 @@
     <title>Karaoke Streaming!</title>
     <link rel="stylesheet" type="text/css" href="/style.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 </head>
 <body>
-	<div class="d3-container toggle-view">
+	<div class="d3-container no-show">
 
     <div id="d3-music">
       <div>
@@ -18,17 +20,17 @@
       	<!-- <source src="/audio/twofold.mp3" /> -->
     	</audio>
     </div>
-
-    <div id="d3-music-frequency">	
-    </div>
+    <button id="start-mic">Start Mic</button>
+    <div id="d3-music-frequency-audio"></div>
+    <div id="d3-music-frequency-mic"></div>
 
   </div>
 
 	<div id="react-container" class="main-container">
 	</div>
-  <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-  <script src="/d3-music-frequency.js"></script>
+
+  <!-- put d3-music-freq into d3audio -->
+  <!-- <script src="/d3-music-frequency.js"></script> -->
   <script src="/d3audio.js"></script>
 	<script type="text/javascript" src="bundle.js"></script>
   <script>
