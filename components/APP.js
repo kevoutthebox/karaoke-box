@@ -61,7 +61,13 @@ var APP = React.createClass({
     // add member node to session storage to save current state
     // until browser closes
     sessionStorage.singer = JSON.stringify(singer);
+
     this.setState({singer: singer});
+
+    // if user session is still available, display play button
+    if (sessionStorage.singer) {
+      document.querySelector('.no-show').style.display = 'block';
+    }
   },
 
   updateSingers(newSingers) {
