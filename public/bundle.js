@@ -31325,6 +31325,15 @@
 	var karaokeRoom = React.createClass({
 		displayName: 'karaokeRoom',
 
+		lessThan4: function lessThan4() {
+			if (this.props.singersInRoom.length > 0) {
+				var allowed = this.props.singersInRoom.map(function (x) {
+					return x.name;
+				});
+				return allowed.indexOf(this.props.singer.name) < 4;
+			}
+			return true;
+		},
 		render: function render() {
 			// if provide singer name, navigate to karaoke room
 			// else sign in
@@ -31333,35 +31342,48 @@
 				{ className: 'toggle-container' },
 				React.createElement(
 					Toggle,
-					{ 'if': this.props.singer.name },
+					{ 'if': this.lessThan4() },
 					React.createElement(
-						'div',
-						{ className: 'welcome-message' },
+						Toggle,
+						{ 'if': this.props.singer.name },
 						React.createElement(
-							'h1',
-							null,
-							'Hello! ',
-							this.props.singer.name
+							'div',
+							{ className: 'welcome-message' },
+							React.createElement(
+								'h1',
+								null,
+								'Hello! ',
+								this.props.singer.name
+							),
+							React.createElement(
+								'p',
+								null,
+								'You are singer number ',
+								this.props.singersInRoom.length
+							),
+							React.createElement(
+								'p',
+								null,
+								'Get your mic ready!'
+							)
 						),
-						React.createElement(
-							'p',
-							null,
-							'You are singer number ',
-							this.props.singersInRoom.length
-						),
-						React.createElement(
-							'p',
-							null,
-							'Get your mic ready!'
-						)
+						React.createElement(Chatbox, this.props)
 					),
-					React.createElement(Chatbox, this.props)
+					React.createElement(
+						Toggle,
+						{ 'if': !this.props.singer.name },
+						React.createElement('img', { className: 'logo', src: './images/KBLogoNoWord.png' }),
+						React.createElement(Enter, { emit: this.props.emit })
+					)
 				),
 				React.createElement(
 					Toggle,
-					{ 'if': !this.props.singer.name },
-					React.createElement('img', { className: 'logo', src: './images/KBLogoNoWord.png' }),
-					React.createElement(Enter, { emit: this.props.emit })
+					{ 'if': !this.lessThan4() },
+					React.createElement(
+						'div',
+						null,
+						' Sorry too many people '
+					)
 				)
 			);
 		}
