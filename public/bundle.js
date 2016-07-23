@@ -55,7 +55,7 @@
 	var APP = __webpack_require__(199);
 	var login = __webpack_require__(248);
 	var karaokeRoom = __webpack_require__(249);
-	var terriblesinger404 = __webpack_require__(252);
+	var terriblesinger404 = __webpack_require__(253);
 
 	var routes = React.createElement(
 		Route,
@@ -31309,7 +31309,7 @@
 	var React = __webpack_require__(1);
 	var Enter = __webpack_require__(250);
 	var Toggle = __webpack_require__(251);
-	var Chatbox = __webpack_require__(253);
+	var Chatbox = __webpack_require__(252);
 
 	var karaokeRoom = React.createClass({
 		displayName: 'karaokeRoom',
@@ -31339,7 +31339,8 @@
 						'p',
 						null,
 						'Get your mic ready!'
-					)
+					),
+					React.createElement(Chatbox, this.props)
 				),
 				React.createElement(
 					Toggle,
@@ -31350,8 +31351,7 @@
 						'Join the room'
 					),
 					React.createElement(Enter, { emit: this.props.emit })
-				),
-				React.createElement(Chatbox, this.props)
+				)
 			);
 		}
 	});
@@ -31432,46 +31432,6 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var Router = __webpack_require__(157);
-	var Link = Router.Link;
-
-	var terriblesinger404 = React.createClass({
-		displayName: 'terriblesinger404',
-
-		//this is to handle bad routes. The Link component is an anchor tag
-		//in react router and we want to notify user of a valid link
-		render: function render() {
-			return React.createElement(
-				'div',
-				{ id: 'bad-link' },
-				React.createElement(
-					'h1',
-					null,
-					' Sorry there\'s no music in karaoke room # 404 '
-				),
-				React.createElement(
-					'p',
-					null,
-					' Did you mean this room : '
-				),
-				React.createElement(
-					Link,
-					{ to: '/karaokeRoom' },
-					' Karaoke Room '
-				)
-			);
-		}
-	});
-
-	module.exports = terriblesinger404;
-
-/***/ },
-/* 253 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
 
 	var Chatbox = React.createClass({
 		displayName: 'Chatbox',
@@ -31524,6 +31484,46 @@
 	});
 
 	module.exports = Chatbox;
+
+/***/ },
+/* 253 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var Router = __webpack_require__(157);
+	var Link = Router.Link;
+
+	var terriblesinger404 = React.createClass({
+		displayName: 'terriblesinger404',
+
+		//this is to handle bad routes. The Link component is an anchor tag
+		//in react router and we want to notify user of a valid link
+		render: function render() {
+			return React.createElement(
+				'div',
+				{ id: 'bad-link' },
+				React.createElement(
+					'h1',
+					null,
+					' Sorry there\'s no music in karaoke room # 404 '
+				),
+				React.createElement(
+					'p',
+					null,
+					' Did you mean this room : '
+				),
+				React.createElement(
+					Link,
+					{ to: '/karaokeRoom' },
+					' Karaoke Room '
+				)
+			);
+		}
+	});
+
+	module.exports = terriblesinger404;
 
 /***/ }
 /******/ ]);
