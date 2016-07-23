@@ -12,14 +12,38 @@ body > svg {
   left: 25px;
   top: 250px;
   width: 1050px;
-  // z-index: 1;
+}
+
+header {
+  margin: 70px 0 30px;
+}
+
+.logo-mini {
+  display: none;
+  left: 330px;
+  position: absolute;
+  width: 60px;
+  transition: 0.3s all ease-in-out;
+}
+
+.logo-mini.active {
+  display: block;
+}
+
+.logo-text {
+  width: 600px;
 }
 
 .d3-container {
   position: absolute;
   left: 400px;
   top: 200px;
-  z-index: 2;
+  z-index: 4;
+}
+
+.login-container {
+  position: relative;
+  z-index: 3;
 }
 
 .logo {
@@ -27,7 +51,7 @@ body > svg {
   margin-bottom: 50px;
 }
 
-.no-show {
+.toggle-view {
   display: none;
 }
 
@@ -41,13 +65,11 @@ body > svg {
   margin: 0 auto;
   width: 300px;
   position: relative;
-  z-index: 2
 }
 
 .toggle-container {
   position: relative;
   overflow: auto;
-  // z-index: 2;
 }
 
 .welcome-message {
