@@ -12,13 +12,14 @@ body > svg {
   left: 25px;
   top: 250px;
   width: 1050px;
-  z-index: -1;
+  // z-index: 1;
 }
 
 .d3-container {
   position: absolute;
   left: 400px;
   top: 200px;
+  z-index: 2;
 }
 
 .logo {
@@ -39,10 +40,14 @@ body > svg {
 .enter-form {
   margin: 0 auto;
   width: 300px;
+  position: relative;
+  z-index: 2
 }
 
 .toggle-container {
+  position: relative;
   overflow: auto;
+  // z-index: 2;
 }
 
 .welcome-message {
