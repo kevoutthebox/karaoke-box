@@ -9,18 +9,19 @@ var APP = React.createClass({
 
   getInitialState() {
     return {
-      title: 'Karaoke Box',
       roomTitle: '',
       status: 'Disconnected',
       singer: {},
       singersInRoom: [],
-      messageList: []
+      messageList: [],
+      startConnection: ''
     }
   },
 
   //all incoming data from server will flow through these functions
   componentWillMount() {
-    this.socket = io('http://localhost:3000');
+
+    this.socket = io();
     this.socket.on('connect', this.connect);
     this.socket.on('disconnect', this.disconnect);
     this.socket.on('welcome', this.welcome);
@@ -37,7 +38,8 @@ var APP = React.createClass({
       this.emit('enter', member);
     }
 
-    this.setState({status: "Connected"});
+    this.setState({status: "Connected",
+                  startConnection: new Date()});
   },
 
   //all outgoing data to server will flow through this emit function
@@ -61,7 +63,14 @@ var APP = React.createClass({
     // add member node to session storage to save current state
     // until browser closes
     sessionStorage.singer = JSON.stringify(singer);
+
     this.setState({singer: singer});
+
+    // if user session is still available, display play button
+    if (sessionStorage.singer) {
+      document.querySelector('.toggle-view').style.display = 'block';
+      document.querySelector('.logo-mini').style.display = 'block';
+    }
   },
 
   updateSingers(newSingers) {
@@ -69,7 +78,12 @@ var APP = React.createClass({
   },
 
   updateMessages(newMessages) {
-    this.setState({messageList: newMessages})
+    var that = this;
+    var messageListDisplay = newMessages.filter(function(msg){
+  			return new Date(msg.createdAt) >= that.state.startConnection;
+  });
+
+    this.setState({messageList: messageListDisplay});
   },
 
   render() {

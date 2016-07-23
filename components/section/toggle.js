@@ -4,7 +4,7 @@ var React = require('react');
 var Toggle = React.createClass({
 	render() {
 		// if the 'if' is true, then display all children nodes
-		return (this.props.if) ? <div>{this.props.children}</div> : null;
+		return (this.props.if) ? <div className='login-container'>{this.props.children}</div> : null;
 	}
 })
 

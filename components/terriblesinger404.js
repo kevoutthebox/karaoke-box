@@ -11,7 +11,7 @@ var terriblesinger404 = React.createClass ({
 				<h1> Sorry there's no music in karaoke room # 404 </h1>
 				<p> Did you mean this room : </p>
 
-				<Link to="/karaokeRoom"> Karaoke Room </Link>
+				<Link to="/"> Karaoke Room </Link>
 			</div>
 		);
 	}

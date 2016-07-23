@@ -1,47 +1,161 @@
-html,
-body {
-  padding: 0;
+html, body, h1, h2, h3, h4, ul, li, p, {
   margin: 0;
+  padding: 0;
 }
 
-.singers-container .singers {
-  list-style-type: none;
+body {
+  position: relative;
 }
 
-.singer{
-  background: #ccc;
+body > svg {
+  position: absolute;
+  left: 25px;
+  top: 250px;
+  width: 1050px;
+}
+
+header {
+  margin: 70px 0 30px;
+}
+
+.logo-mini {
+  display: none;
+  left: 330px;
+  position: absolute;
+  width: 60px;
+  transition: 0.3s all ease-in-out;
+}
+
+.logo-mini.active {
+  display: block;
+}
+
+.logo-text {
+  width: 600px;
+}
+
+.d3-container {
+  position: absolute;
+  left: 400px;
+  top: 200px;
+  z-index: 4;
+}
+
+.login-container {
+  position: relative;
+  z-index: 3;
+}
+
+.logo {
+  width: 350px;
+  margin-bottom: 50px;
+}
+
+.toggle-view {
+  display: none;
+}
+
+.main-container {
+  padding: 0 25px;
+  text-align: center;
+  width: 1440px;
+}
+
+.enter-form {
+  margin: 0 auto;
+  width: 300px;
+  position: relative;
+}
+
+.toggle-container {
+  position: relative;
+  overflow: auto;
+}
+
+.welcome-message {
   border: 1px solid #eee;
-  height: 150px;
-
-  opacity:0;
-  opacity: 1 \9; /*just in case ie*/
-  -webkit-animation:fadeIn ease-in 1;
-  -moz-animation:fadeIn ease-in 1;
-  animation:fadeIn ease-in 1;
-
-  -webkit-animation-fill-mode:forwards;
-  -moz-animation-fill-mode:forwards;
-  animation-fill-mode:forwards;
-
-  -webkit-animation-duration:0.5s;
-  -moz-animation-duration:0.5s;
-  animation-duration:0.5s;
-
-  -webkit-animation-delay: 0.1s;
-  -moz-animation-delay: 0.1s;
-  animation-delay: 0.1s;
+  border-radius: 4px;
+  float: left;
+  height: 500px;
+  width: 1050px;
 }
 
-/* Keyframes for the fade-in */
-@-webkit-keyframes fadeIn {
-  from { opacity:0; }
-  to { opacity:1; }
+.chatbox {
+  float: right;
+  width: 300px;
 }
-@-moz-keyframes fadeIn {
-  from { opacity:0; }
-  to { opacity:1; }
+
+.chatbox button {
+  width: 100%;
 }
-@keyframes fadeIn {
-  from { opacity:0; }
-  to { opacity:1; }
+
+.message-list {
+  border: 1px solid #eee;
+  border-radius: 4px;
+  height: 400px;
+  list-style-type: none;
+  overflow: scroll;
+  padding-left: 0;
+  text-align: left;
 }
+
+.message {
+  color: #555;
+  font-size: 15px;
+  padding: 7px 6px;
+}
+
+.message:nth-child(even) {
+  background: #fff;
+}
+
+.message:nth-child(odd) {
+  background: #eee;
+}
+
+.form-control {
+  margin-bottom: 10px;
+}
+
+
+// .singers-container .singers {
+//   list-style-type: none;
+// }
+
+// .singer{
+//   background: #ccc;
+//   border: 1px solid #eee;
+//   height: 150px;
+
+//   opacity:0;
+//   opacity: 1 \9; /*just in case ie*/
+//   -webkit-animation:fadeIn ease-in 1;
+//   -moz-animation:fadeIn ease-in 1;
+//   animation:fadeIn ease-in 1;
+
+//   -webkit-animation-fill-mode:forwards;
+//   -moz-animation-fill-mode:forwards;
+//   animation-fill-mode:forwards;
+
+//   -webkit-animation-duration:0.5s;
+//   -moz-animation-duration:0.5s;
+//   animation-duration:0.5s;
+
+//   -webkit-animation-delay: 0.1s;
+//   -moz-animation-delay: 0.1s;
+//   animation-delay: 0.1s;
+// }
+
+// /* Keyframes for the fade-in */
+// @-webkit-keyframes fadeIn {
+//   from { opacity:0; }
+//   to { opacity:1; }
+// }
+// @-moz-keyframes fadeIn {
+//   from { opacity:0; }
+//   to { opacity:1; }
+// }
+// @keyframes fadeIn {
+//   from { opacity:0; }
+//   to { opacity:1; }
+// }

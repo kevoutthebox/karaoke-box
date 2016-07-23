@@ -1,4 +1,74 @@
 // imports D3MusicFrequency object
+function D3MusicFrequency(color) {
+  this.mainSvg = null;
+  this.mainSvgHeight = 300;
+  this.mainSvgWidth = 1200;
+  this.barPadding = '1';
+  this.analyser = null; // analyser node that writes frequencyData
+  this.frequencyData = null; // sync frequencyData 8bit or 32bit array to D3Music
+
+  this.createMainSvg = function(parent) {
+    this.mainSvg = d3.select(parent).append('svg').attr('height', this.mainSvgHeight).attr('width', this.mainSvgWidth);
+  };
+
+  this.bind = function(analyser,frequencyData) {
+    this.analyser = analyser;
+    this.frequencyData = frequencyData;
+  };
+
+  this.createFrequencies = function() {
+    this.mainSvg
+      .selectAll('rect')
+      .data(this.frequencyData)
+      .enter()
+      .append('rect')
+      .attr('x',(d, i) => {
+        return i * (this.mainSvgWidth / this.frequencyData.length);
+      })
+      .attr('width', this.mainSvgWidth / this.frequencyData.length - this.barPadding);
+  };
+
+  this.renderFrequencies = function() {
+    // requestAnimationFrame(this.renderFrequencies);
+    this.analyser.getByteFrequencyData(this.frequencyData); // now frequencyData array has data
+
+    this.mainSvg.selectAll('rect')
+      .data(this.frequencyData)
+      .attr('y', (d) => {
+        return this.mainSvgHeight - d;
+      })
+      .attr('height', (d) => {
+        return d;
+      })
+      .attr('fill', (d) => {
+        if (color === 'purple') {
+          return 'rgb(' + d +  ',' + 30 + ',' + 200 + ')';
+        } else if (color === 'lightPurple') {
+          return 'rgb(' + d +  ',' + 45 + ',' + 170 + ')';
+        } else if (color === 'green') {
+          return 'rgb(' + 100 +  ',' + 200 + ',' + d + ')';
+        } else if (color === 'greenPink') {
+          return 'rgb(' + 255 - d +  ',' + 0 + ',' + 0 + ')';
+        } else if (color === 'neonYellow') {
+          return 'rgb(' + (d + 50) +  ',' + 255 + ',' + 0 + ')';
+        } else if (color === 'blackRed') {
+          return 'rgb(' + (d + 50) +  ',' + 0 + ',' + 0 + ')';
+        } else if (color === 'redBlack') {
+          return 'rgb(' + (255 - d) +  ',' + 0 + ',' + 0 + ')';
+        } else if (color === 'orange') {
+          return 'rgb(' + Math.floor( d * 0.6 + 70) +  ',' + 120 + ',' + Math.floor(0) + ')';
+        } else if (color === 'darkPurple') {
+          return 'rgb(' + Math.floor( d * 0.90 + 70)  +  ',' + 40 + ',' + 230 + ')';
+        }
+      });
+  };
+
+  this.remove = function() {
+    this.mainSvg.remove(); // this might not work! it hasnt bee tested!
+  };
+}
+
+// ############################################################
 
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
@@ -12,7 +82,7 @@ function karaokeScoring(audioMaxIndex, micMaxIndex) {
   // closure
   return function (audioMaxIndex, micMaxIndex) {
     if (audioMaxIndex === null || micMaxIndex === null) {
-      console.log('either the mic or the audio is not on');
+      // console.log('either the mic or the audio is not on');
       return;
     }
     if (scoreInterval <= 5) {
@@ -22,7 +92,7 @@ function karaokeScoring(audioMaxIndex, micMaxIndex) {
     scoreInterval = 0;
     if (audioMaxIndex === micMaxIndex) {
       // console.log('match');
-      console.log('percentage: ' + score/iterations);
+      // console.log('percentage: ' + score/iterations);
       score++;
       iterations++;
       scorePercent = (score/iterations).toFixed(3);
@@ -36,13 +106,10 @@ function karaokeScoring(audioMaxIndex, micMaxIndex) {
     }
   };
 }
-
 var karaokeScoring = karaokeScoring();
 
+// can only have 1 of these window on loads
 window.onload = function() {
-  var audioMaxIndex = null;
-  var micMaxIndex = null;
-
   var startMic = $('#start-mic');
   var stopMic = $('#stop-mic');
 
@@ -55,7 +122,9 @@ window.onload = function() {
     }
   });
 
-  // displays frequency data of sources
+  // tracks the freq with the highest amplitude. used in scoring
+  var audioMaxIndex = null;
+  var micMaxIndex = null;
 
   // AUDIO
   var audioContext = new AudioContext();
@@ -65,7 +134,7 @@ window.onload = function() {
 
   audioAnalyser.fftSize = 4096;
   audioAnalyser.minDecibels = -95;
-  audioAnalyser.smoothingTimeConstant = 0.85;
+  // audioAnalyser.smoothingTimeConstant = 0.85;
 
   audioSource.connect(audioAnalyser);
   audioSource.connect(audioContext.destination);
@@ -74,7 +143,7 @@ window.onload = function() {
 
   var audioFrequencyData = new Uint8Array(audioAnalyser.frequencyBinCount/15);
 
-  var d3MusicFrequencyAudio = new D3MusicFrequency();
+  var d3MusicFrequencyAudio = new D3MusicFrequency('lightPurple');
   d3MusicFrequencyAudio.bind(audioAnalyser, audioFrequencyData);
   d3MusicFrequencyAudio.createMainSvg('body');
   d3MusicFrequencyAudio.createFrequencies();
@@ -98,7 +167,7 @@ window.onload = function() {
       audioMaxIndex = maxIndex;
       karaokeScoring(audioMaxIndex, micMaxIndex);
       d3MusicFrequencyAudio.renderFrequencies(audioAnalyser, audioFrequencyData);
-    }, 10);
+    }, 5);
   });
 
   // audio.addEventListener('pause', function() {
@@ -118,12 +187,12 @@ window.onload = function() {
     streamAnalyser.fftSize = 4096;
     streamAnalyser.minDecibels = -90;
     streamAnalyser.maxDecibels = -20;
-    streamAnalyser.smoothingTimeConstant = 0.50;
+    // streamAnalyser.smoothingTimeConstant = 0.50;
 
     streamSource.connect(streamAnalyser);
     var streamFrequencyData = new Uint8Array(streamAnalyser.frequencyBinCount/15);
 
-    var d3MusicFrequencyStream = new D3MusicFrequency(streamAnalyser, streamFrequencyData);
+    var d3MusicFrequencyStream = new D3MusicFrequency('purple');
     d3MusicFrequencyStream.bind(streamAnalyser, streamFrequencyData);
     d3MusicFrequencyStream.createMainSvg('body');
     d3MusicFrequencyStream.createFrequencies();
@@ -151,7 +220,7 @@ window.onload = function() {
       // console.log('max ' + max);
       // console.log('max index ' + maxIndex);
       d3MusicFrequencyStream.renderFrequencies();
-    }, 10);
+    }, 5);
 
   }
 

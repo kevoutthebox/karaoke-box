@@ -6,19 +6,19 @@ var Enter = React.createClass({
 		// fell back to findDOMNode method
 		var singerName = React.findDOMNode(this.refs.name).value;
 		this.props.emit('enter', {name : singerName});
+
+		// document.querySelector('.toggle-view').style.display = 'block';
 	},
 
 	render() {
 		// javascript void to prevent posting to
 		// server because we want to communicate via sockets
 		return (
-			<form action="javascript:void(0)" onSubmit={this.enter}>
-
-				<label> Full Name </label>
+			<form className="enter-form" action="javascript:void(0)" onSubmit={this.enter}>
 				<input ref="name" className="form-control"
-							placeholder="enter your name"
+							placeholder="Please enter name"
 							required />
-				<button className="btn btn-primary">Enter</button>
+				<button type="submit" className="btn btn-primary">Enter</button>
 			</form>
 		)
 	}
