@@ -1,4 +1,25 @@
 var React = require('react');
-var APP = require('./components/APP');
+var Router = require('react-router');
+var Route = Router.Route;
+var NotFoundRoute = Router.NotFoundRoute;
+var DefaultRoute = Router.DefaultRoute;
 
-React.render(<APP />, document.getElementById('react-container'));
+var APP = require('./components/APP');
+var login = require('./components/login');
+var karaokeRoom = require('./components/karaokeRoom');
+var terriblesinger404 = require('./components/terriblesinger404');
+
+var routes = (
+	<Route handler={APP}>
+		<DefaultRoute handler={login} />
+		<Route name="karaokeRoom" path="karaokeRoom" handler={karaokeRoom}></Route>
+		<NotFoundRoute handler = {terriblesinger404} />
+	</Route>
+); 
+
+// When run routes, callback gets appropriate routes, which represents
+// DOM at top level
+Router.run(routes, function(Handler) {
+	React.render(<Handler />, document.getElementById('react-container'));
+});
+
